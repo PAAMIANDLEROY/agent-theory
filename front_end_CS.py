@@ -30,7 +30,7 @@ def display_case(nlp_steps):
     [0,0,0,3,1],
     [0,0,0,0,3]])
 
-    Istate=3
+    Istate=1
 
     Fstate=[4,5]
     t1,t2,t3 = Init(Mat_transition,Istate,Fstate)
@@ -245,12 +245,12 @@ def display_case(nlp_steps):
     st.write("       ")
     st.markdown('#### iii - Strategy')
     st.write("        ")
-    st.write('Action of t1 in the initial state')
-    t1_act=st.selectbox(' ',['rigth','left'])
-    st.write('Action of t2 in the initial state')
-    t2_act=st.selectbox(' ',['rigth','straight', 'left'])
-    st.write('Action of controller in the state after')
-    c_act=st.selectbox(' ',['6','5','4','3','2','1'])
+    st.write('     ')
+    t1_act=st.selectbox('Action of t1 in the initial state',['right','left'])
+    st.write('      ')
+    t2_act=st.selectbox('Action of t2 in the initial state',['right','straight', 'left'])
+    st.write('     ')
+    c_act=st.selectbox('Action of controller in the state after',['6','5','4','3','2','1'])
     st.write('    ')
     cs1=st.selectbox('Action in s1',['a','o', 'e'])
     st.write('    ')
@@ -502,7 +502,7 @@ def display_MS():
   st.write(f"    ")
   List_name_agent=[]
   for id_agent in range(int(Na)):
-    tmp=st.text_input('Name of the state number '+str(id_agent),'A'+str(id_agent))
+    tmp=st.text_input('Name of the agent number '+str(id_agent),'A'+str(id_agent))
     List_name_agent.append(tmp)
   st.write(f"    ")
   NS=st.selectbox('Number of State',['1','2','3','4','5'])

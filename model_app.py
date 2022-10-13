@@ -131,7 +131,7 @@ if __name__=='__main__':
 
 st.markdown(" ")
 st.markdown("### ** 👨🏼‍💻 Télécom Paris Researcher: **")
-st.image(['images/1.png'], width=150,caption=["Vadim Malvone"])
+st.image(['images/1.png'], width=230,caption=["Vadim Malvone"])
 
 st.markdown('### Made by Hi!Paris')
 images = Image.open('./images/hi-paris.png')
@@ -141,7 +141,7 @@ st.markdown('### Contributors:')
 PA=Image.open('./images/PA.jpg')
 Pierre=Image.open('./images/Pierre.jpg')
 GAE=Image.open('./images/gaetan.png')
-st.image([PA,GAE,Pierre],width=150)
+st.image([PA,GAE,Pierre],width=110)
 
 
 
