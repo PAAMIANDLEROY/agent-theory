@@ -135,12 +135,13 @@ st.image(['images/1.png'], width=150,caption=["Vadim Malvone"])
 
 st.markdown('### Made by Hi!Paris')
 images = Image.open('./images/hi-paris.png')
-st.image(images, width=150)
+st.image(images, width=250)
 st.write('    ')
 st.markdown('### Contributors:')
 PA=Image.open('./images/PA.jpg')
+PERRE=Image.open('./images/Pierre.jpg')
 GAE=Image.open('./images/gaetan.png')
-st.image([PA,GAE],width=150)
+st.image([PA,GAE,Pierre],width=150)
 
 
 
