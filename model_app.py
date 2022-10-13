@@ -139,7 +139,7 @@ st.image(images, width=250)
 st.write('    ')
 st.markdown('### Contributors:')
 PA=Image.open('./images/PA.jpg')
-PERRE=Image.open('./images/Pierre.jpg')
+Pierre=Image.open('./images/Pierre.jpg')
 GAE=Image.open('./images/gaetan.png')
 st.image([PA,GAE,Pierre],width=150)
 
