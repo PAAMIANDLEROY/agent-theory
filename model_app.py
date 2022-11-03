@@ -80,7 +80,7 @@ def main():
     st.markdown("# VITAMIN 🔍 🖥")
     st.subheader(
         """
-        VerIficaTion of A MultI ageNt system  🧪
+        VerIficaTion viA MultI ageNt system  🧪
         """
     )
     st.markdown("     ")
@@ -89,14 +89,6 @@ def main():
 
 
     selected_indices = []
-    master_review = "DEFAULT REVIEW - This is the season in which theatres revisit their histories. In the crumbling glory of Wilton’s Music Hall, east London, Fiona Shaw is reprising her wild version of The Waste Land, talking about death in the City, with the aid of Music Hall voices. Hackney Empire has burst into its traditional life with rousing panto. Meanwhile, the Orange Tree is producing The Lady or the Tiger, which had its premiere at the theatre in 1975 and was revived there in 1989. Now it’s back again; I wish it wasn’t. Based on a whimsical 1882 story by Frank Stockton, the show has words by Michael Richmond and Jeremy Paul and music by Nola York, who once sang with the Chantelles and was the first woman to write a complete score for a West End musical. It has a few good mots, a dash of sauce, but hardly any point It features one despotic ruler who follows his subjects’ every wiggle “from sperm to worm”, one reluctantly virgin daughter (“Think of your position”; “I am, I wish it was horizontal”), one drippy suitor and one multipurpose character who flips from role to role by changing his hat. Riona O’Connor has a suitably 70s Lulu-like shout of a voice but does too much gurgling to be really convincing as a grown-up: she sings better than she swings. As the naughty king - ooh what a scamp that tyrant is - Howard Samuels dispenses oeillades, pecks on the cheeks and pats on the knees to the ladies in the front row. Sam Walters’s production is almost eerily pleasant. It’s like a panto that doesn’t yell but quietly chortles."
-
-
-
-
-
-
-
 
 
     index_review = 0
@@ -108,6 +100,10 @@ def main():
         ),
         unsafe_allow_html=True,
     )
+    if 'info_model' not in st.session_state:
+      st.session_state.info_model=[]
+    if 'cmpt_model' not in st.session_state:
+      st.session_state.cmpt_model=0
     if 'page' not in st.session_state:
       st.session_state.page=1
     st.sidebar.header("Dashboard")
@@ -117,6 +113,8 @@ def main():
     if st.sidebar.button('Model Cheking for MAS'):
       st.session_state.page=2
     if st.sidebar.button('Model and Strategy'):
+      st.session_state.cmpt_model=0
+      st.session_state.info_model=[]
       st.session_state.page=3
     display_page(st.session_state.page)
 

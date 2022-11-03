@@ -503,10 +503,27 @@ def display_MCMAS():
 
 
 def display_MS():
+  if st.session_state.cmpt_model==0:
+    D_agent()
+  elif st.session_state.cmpt_model==1:
+    D_state()
+  elif st.session_state.cmpt_model==2:
+    D_action()
+  elif st.session_state.cmpt_model==3:
+    D_transition()
+  elif st.session_state.cmpt_model==4:
+    D_printgraph()
+  elif st.session_state.cmpt_model==5:
+    D_logic()
+
   st.markdown("---")
   st.write(f"    ")
-
   st.header("Model design for User")
+  st.write(f"    ")
+  st.markdown("---")
+
+
+def D_agent():
   st.write(f"    ")
   st.write(f"    ")
   Na=st.selectbox('Number of agent',['1','2','3','4'])
@@ -516,34 +533,82 @@ def display_MS():
     tmp=st.text_input('Name of the agent number '+str(id_agent),'A'+str(id_agent))
     List_name_agent.append(tmp)
   st.write(f"    ")
+  if st.button('Next : To Agent'):
+    (st.session_state.info_model).append(List_name_agent)
+    st.session_state.cmpt_model=1
+    st.experimental_rerun()
+
+
+def D_state():
   NS=st.selectbox('Number of State',['1','2','3','4','5'])
   st.write("     ")
   List_name_state=[]
   for id_state in range(int(NS)):
     tmp=st.text_input('Name of the state number '+str(id_state),'s'+str(id_state))
     List_name_state.append(tmp)
-  st.write("      ")
+  st.write(f"     ")
+  if st.button('Next : To Action'):
+    (st.session_state.info_model).append(List_name_state)
+    st.session_state.cmpt_model=2
+    st.experimental_rerun()
+
+def D_action():
+  Nact=st.selectbox('Number of Action',['1','2','3','4','5','6','7'])
+  st.write("     ")
+  List_name_action=[]
+  for id_action in range(int(Nact)):
+    tmp=st.text_input('Name of the action number '+str(id_action),'Act'+str(id_action))
+    List_name_action.append(tmp)
+  st.write(f"     ")
+  if st.button('Next : To Transition'):
+    (st.session_state.info_model).append(List_name_action)
+    st.session_state.cmpt_model=3
+    st.experimental_rerun()
+
+
+def D_transition():
   st.write('Design your graph')
   st.write('For each couple of state')
   st.write("     ")
   Mat_transition=[]
-  for id_state1 in range(int(NS)):
+  List_name_state=st.session_state.info_model[1]
+  NS=len(List_name_state)
+  List_action=st.session_state.info_model[2]
+  for id_state1 in range(NS):
     List_transition=[]
     for id_state2 in range(int(NS)):
-      tmp=st.text_input('If the state '+List_name_state[id_state1]+' is connect with '+List_name_state[id_state2]+' ,write the name of the transition, 0 otherwise','0')
+      tmp=st.selectbox('If the state '+List_name_state[id_state1]+' is connect with '+List_name_state[id_state2]+' ,write the name of the transition, 0 otherwise',List_action)
       List_transition.append(tmp)
     Mat_transition.append(List_transition)
   st.write("     ")
-  st.write("     ")
+  if st.button('Next : To Graph'):
+    (st.session_state.info_model).append(Mat_transition)
+    st.session_state.cmpt_model=4
+    st.experimental_rerun()
+
+def D_printgraph():
   st.write('Graph')
   st.write("     ")
-  if st.button('Print Diagram'):
-    st.markdown('#### iii - Diagram: ')
-    test=display_graph_MS(Mat_transition,List_name_agent,List_name_state)
-    st.graphviz_chart(test)
-  
-  st.markdown("---")
+  st.markdown('#### iii - Diagram: ')
+  test=display_graph_MS(st.session_state.info_model[3],st.session_state.info_model[0],st.session_state.info_model[1])
+  st.graphviz_chart(test)
+  if st.button('Next : To Logic'):
+    (st.session_state.info_model).append(test)
+    st.session_state.cmpt_model=5
+    st.experimental_rerun()
 
+def D_logic():
+  st.header("Model Checking for MAS")
+  st.write(f"    ")
+  st.write(f"    ")
+  st.markdown('Logic Selection ')
+  Logic=st.selectbox('Selec your logic',['ATL','CTL','LTL','SL'])
 
+  st.write(f"    ")
+  st.write(f"    ")
+  formula=st.text_input('Write your formula',' ')
+  st.write("     ")
+  st.write('Your formula with the '+Logic+' logic is '+formula)
+  st.write("     ")
 
 
