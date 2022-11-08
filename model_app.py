@@ -112,6 +112,8 @@ def main():
       st.session_state.page=1
     if st.sidebar.button('Model Cheking for MAS'):
       st.session_state.page=2
+      st.session_state.cmpt_model=-1
+      st.session_state.info_model_test=[]
     if st.sidebar.button('Model and Strategy'):
       st.session_state.cmpt_model=0
       st.session_state.info_model=[]

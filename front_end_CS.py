@@ -1,6 +1,16 @@
 import streamlit as st
 from back_end_CS import *
 import os
+from LTLLexer import *
+from LTLParser import *
+from LTLListener import *
+from LTLVisitor import *
+from ATLLexer import *
+from ATLParser import *
+from ATLListener import *
+from ATLVisitor import *
+
+
 def display_case(nlp_steps):
 
 
@@ -475,6 +485,26 @@ def display_case(nlp_steps):
 
 
 
+def D_parser_test():
+  st.header("Parser")
+  st.write(f"    ")
+  print("logic")
+  print(st.session_state.info_model_test[0][0])
+  if st.session_state.info_model_test[0][0]=='LTL':
+    print("formula")
+    print(st.session_state.info_model_test[0][1])
+    lexer = LTLLexer(st.session_state.info_model_test[0][1])
+    print("lexer")
+    print(lexer)
+    stream = CommonTokenStream(lexer)
+    print("stream")
+    print(stream)
+    parser = LTLParser(stream)
+    print("parser")
+    print(parser)
+    tree = parser.ltlExpr()
+    visitor = YOUR_VISITOR_CLASS()
+    print(visitor.visit(tree))
 
 
 
@@ -483,27 +513,34 @@ def display_case(nlp_steps):
 
 
 def display_MCMAS():
-  st.markdown("---")
-  st.write(f"    ")
+  if st.session_state.cmpt_model==-1:
+    st.markdown("---")
+    st.write(f"    ")
+    st.header("Model Checking for MAS")
+    st.write(f"    ")
+    st.write(f"    ")
+    st.markdown('Logic Selection ')
+    Logic=st.selectbox('Selec your logic',['ATL','CTL','LTL','SL'])
+    st.write(f"    ")
+    st.write(f"    ")
+    formula=st.text_input('Write your formula',' ')
+    st.write("     ")
+    st.write('Your formula with the '+Logic+' logic is '+formula)
+    st.write("     ")
+    st.write("     ")
+    st.markdown("---")
+    if st.button('Next : To Parser'):
+      (st.session_state.info_model_test).append([Logic,formula])
+      st.session_state.cmpt_model=-2
+      st.experimental_rerun()
+  if st.session_state.cmpt_model==-2:
+    D_parser_test()
 
-  st.header("Model Checking for MAS")
-  st.write(f"    ")
-  st.write(f"    ")
-  st.markdown('Logic Selection ')
-  Logic=st.selectbox('Selec your logic',['ATL','CTL','LTL','SL'])
 
-  st.write(f"    ")
-  st.write(f"    ")
-  formula=st.text_input('Write your formula',' ')
-  st.write("     ")
-  st.write('Your formula with the '+Logic+' logic is '+formula)
-  st.write("     ")
-  st.write("     ")
-  st.markdown("---")
 
 
 def display_MS():
-  if st.session_state.cmpt_model==0:
+  if st.session_state.cmpt_model<=0:
     D_agent()
   elif st.session_state.cmpt_model==1:
     D_state()
@@ -515,6 +552,8 @@ def display_MS():
     D_printgraph()
   elif st.session_state.cmpt_model==5:
     D_logic()
+  elif st.session_state.cmpt_model==6:
+    D_parser()
 
   st.markdown("---")
   st.write(f"    ")
@@ -610,5 +649,21 @@ def D_logic():
   st.write("     ")
   st.write('Your formula with the '+Logic+' logic is '+formula)
   st.write("     ")
+  if st.button('Next : To Parser'):
+    (st.session_state.info_model).append([Logic,formula])
+    st.session_state.cmpt_model=6
+    st.experimental_rerun()
+
+
+def D_parser():
+  st.header("Parser")
+  st.write(f"    ")
+  if st.session_state.info_model[5][0]=='LTL':
+    lexer = LTLLexer(st.session_state.info_model[5][1])
+    stream = CommonTokenStream(lexer)
+    parser = LTLParser(stream)
+    tree = parser.ltlExpr()
+    visitor = YOUR_VISITOR_CLASS()
+    print(visitor.visit(tree))
 
 
