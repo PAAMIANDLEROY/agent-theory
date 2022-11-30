@@ -1,4 +1,3 @@
-## NLP App Theatre Reviews
 
 ### Import packages
 import os
@@ -110,13 +109,14 @@ def main():
     st.sidebar.markdown("---")
     if st.sidebar.button('Cases Studies'):
       st.session_state.page=1
-    if st.sidebar.button('Model Cheking for MAS'):
+    if st.sidebar.button('Part for Devlopement '):
       st.session_state.page=2
       st.session_state.cmpt_model=-1
       st.session_state.info_model_test=[]
-    if st.sidebar.button('Model and Strategy'):
+    if st.sidebar.button('Model Cheking for MAS'):
       st.session_state.cmpt_model=0
       st.session_state.info_model=[]
+      st.session_state.mat_transi=[]
       st.session_state.page=3
     display_page(st.session_state.page)
 
