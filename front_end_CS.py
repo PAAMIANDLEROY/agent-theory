@@ -688,8 +688,7 @@ def D_transition(act_input,Na):
   for id_state1 in range(NS):
     List_transition=[]
     for id_state2 in range(int(NS)):
-      tmp=st.multiselect('Action of '+st.session_state.info_model[0][0][act_input]+ ' in the state '+List_name_state[id_state1]+' to '+List_name_state[id_state2]+'.',List_action)
-      print(tmp)
+      tmp=st.multiselect('Action of '+st.session_state.info_model[0][0][act_input]+ ' in the state '+List_name_state[id_state1]+' to '+List_name_state[id_state2]+'.',List_action,List_action[1])
       List_transition.append(tmp)
     Mat_transition.append(List_transition)
   st.write("     ")

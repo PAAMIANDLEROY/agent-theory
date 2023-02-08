@@ -99,6 +99,7 @@ def main():
         ),
         unsafe_allow_html=True,
     )
+    #Useful Session State
     if 'info_model' not in st.session_state:
       st.session_state.info_model=[]
     if 'cmpt_model' not in st.session_state:
